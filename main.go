@@ -23,7 +23,7 @@ func main() {
 		for _, im := range ims {
 			fmt.Printf("=====================%s==================\n", im)
 			imobj, _ := rbd.OpenImageReadOnly(ctx, im, rbd.NoSnapshot)
-			info, err := imobj.GetSize()
+			info, err := imobj.Stat()
 			if err != nil {
 				fmt.Println(err.Error())
 			}
