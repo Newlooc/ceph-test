@@ -21,7 +21,11 @@ func main() {
 		ctx, _ := conn.OpenIOContext(pool)
 		ims, _ := rbd.GetImageNames(ctx)
 		for _, im := range ims {
-			fmt.Println(im)
+			fmt.Printf("=====================%s==================\n", im)
+			imobj := rbd.GetImage(ctx, im)
+			info, _ := imobj.Stat()
+			fmt.Printf("%+s\n", info)
+			fmt.Println("=======================================")
 		}
 	}
 }
