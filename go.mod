@@ -1,4 +1,4 @@
-module github.com/Newlooc/ceph-sdk
+module github.com/Newlooc/ceph-test
 
 go 1.14
 
