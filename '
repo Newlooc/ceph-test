@@ -17,11 +17,8 @@ func main() {
 
 	pools, _ := conn.ListPools()
 
-	for _, pool := range pools {
+	for _, v := range pools {
 		ctx, _ := conn.OpenIOContext(pool)
-		ims, _ := rbd.GetImageNames(ctx)
-		for _, im := range ims {
-			fmt.Println(im)
-		}
+		im, err := rbd.GetImageNames(ctx)
 	}
 }
