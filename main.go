@@ -13,7 +13,7 @@ func main() {
 
 	info, _ := conn.GetClusterStats()
 
-	fmt.Printf("%+v", info)
+	fmt.Printf("%+v\n", info)
 
 	pools, _ := conn.ListPools()
 
@@ -23,7 +23,10 @@ func main() {
 		for _, im := range ims {
 			fmt.Printf("=====================%s==================\n", im)
 			imobj := rbd.GetImage(ctx, im)
-			info, _ := imobj.Stat()
+			info, err := imobj.Stat()
+			if err != nil {
+				fmt.Println(err.Error())
+			}
 			fmt.Printf("%+s\n", info)
 			fmt.Println("=======================================")
 		}
