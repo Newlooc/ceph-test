@@ -27,7 +27,7 @@ func main() {
 			if err != nil {
 				fmt.Println(err.Error())
 			}
-			fmt.Printf("%+s\n", info)
+			fmt.Printf("%+v\n", info)
 			fmt.Println("=======================================")
 		}
 	}
