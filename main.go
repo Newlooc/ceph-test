@@ -23,7 +23,7 @@ func main() {
 		for _, im := range ims {
 			fmt.Printf("=====================%s==================\n", im)
 			imobj := rbd.GetImage(ctx, im)
-			info, err := imobj.Stat()
+			info, err := imobj.GetSize()
 			if err != nil {
 				fmt.Println(err.Error())
 			}
