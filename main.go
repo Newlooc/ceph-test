@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	cred, err := cephutil.NewCredentials("admin", "AQB48uBebNTYLhAA+PIZ8M0yqbyBK4cdSK6szA==")
+	cred, err := cephutil.NewCredentials("kubernetes", "AQD+ZuJeZS+ZDBAA5Ox2st5Hg3OgQaYcEPzgfA==")
 	if err != nil {
 		panic(err.Error())
 	}
