@@ -20,6 +20,11 @@ func main() {
 		panic(err.Error())
 	}
 
+	// Create ceph.conf for use with CLI commands
+	if err = cephutil.WriteCephConfig(); err != nil {
+		panic(err.Error())
+	}
+
 	info, err := conn.GetClusterStats()
 	if err != nil {
 		panic(err.Error())
