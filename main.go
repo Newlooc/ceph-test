@@ -8,24 +8,45 @@ import (
 )
 
 func main() {
-	cred, _ := cephutil.NewCredentials("kubernetes", "AQD+ZuJeZS+ZDBAA5Ox2st5Hg3OgQaYcEPzgfA==")
+	cred, err := cephutil.NewCredentials("kubernetes", "AQD+ZuJeZS+ZDBAA5Ox2st5Hg3OgQaYcEPzgfA==")
+	if err != nil {
+		panic(err.Error())
+	}
 	defer cred.DeleteCredentials()
 
 	connPool := cephutil.NewConnPool(2*time.Second, 10*time.Second)
-	conn, _ := connPool.Get("kubernetes", "10.6.209.21:6789", cred.ID, cred.KeyFile)
+	conn, err := connPool.Get("kubernetes", "10.6.209.21:6789", cred.ID, cred.KeyFile)
+	if err != nil {
+		panic(err.Error())
+	}
 
-	info, _ := conn.GetClusterStats()
+	info, err := conn.GetClusterStats()
+	if err != nil {
+		panic(err.Error())
+	}
 
 	fmt.Printf("%+v\n", info)
 
-	pools, _ := conn.ListPools()
+	pools, err := conn.ListPools()
+	if err != nil {
+		panic(err.Error())
+	}
 
 	for _, pool := range pools {
-		ctx, _ := conn.OpenIOContext(pool)
-		ims, _ := rbd.GetImageNames(ctx)
+		ctx, err := conn.OpenIOContext(pool)
+		if err != nil {
+			panic(err.Error())
+		}
+		ims, err := rbd.GetImageNames(ctx)
+		if err != nil {
+			panic(err.Error())
+		}
 		for _, im := range ims {
 			fmt.Printf("=====================%s==================\n", im)
-			imobj, _ := rbd.OpenImageReadOnly(ctx, im, rbd.NoSnapshot)
+			imobj, err := rbd.OpenImageReadOnly(ctx, im, rbd.NoSnapshot)
+			if err != nil {
+				panic(err.Error())
+			}
 			info, err := imobj.Stat()
 			if err != nil {
 				fmt.Println(err.Error())
